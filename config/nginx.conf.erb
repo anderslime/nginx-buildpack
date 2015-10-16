@@ -40,6 +40,18 @@ http {
       proxy_set_header Host $http_host;
       proxy_redirect off;
       proxy_pass http://app_server;
-    }
+      }
+
+    <% if ENV["MAIN_APP_URL"] %>
+      location <%= ENV["MAIN_APP_NGINX_LOCATION"] %> {
+        proxy_pass <%= ENV["MAIN_APP_URL"] %>;
+        proxy_set_header Real-IP $remote_addr;
+        proxy_set_header Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header NginX-Proxy true;
+        proxy_ssl_session_reuse off;
+        proxy_redirect off;
+        <% if ENV["NGINX_DEBUG"] %>add_header Ember-Cli-Proxy on;<% end %>
+      }
+    <% end %>
   }
 }
