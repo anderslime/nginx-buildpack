@@ -5,7 +5,7 @@ set -e
 build_dir=$1
 
 mkdir -p "$1/bin/"
-status "Downloading and installing nginx"
+echo "-----> Downloading and installing nginx"
 nginx_url=https://s3.amazonaws.com/devmynd-github/heroku-nginx-1.6.0.tar.gz
 curl $nginx_url -s -o - | tar xzf - -C $build_dir/vendor
 echo "-----> nginx-buildpack: Installed 1.6 to app/bin"
