@@ -58,6 +58,7 @@ fi
 	#We also expect a socket to be at /tmp/nginx.socket.
 	echo 'buildpack=nginx at=nginx-start'
 	bin/nginx -p . -c config/nginx.conf
+  bin/nginx/sbin/nginx -p $HOME -c $HOME/config/nginx.conf
 	echo 'nginx' >$psmgr
 ) &
 
